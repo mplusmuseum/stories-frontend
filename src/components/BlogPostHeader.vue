@@ -4,6 +4,7 @@
       v-if="post.hero"
       :is="post.hero.type"
       :content="post.hero.content"
+      :share="share"
       :caption="false"></component>
     <h1 class="blog-post__title fs-l"><dynamic-title :title="post.title"></dynamic-title></h1>
     <div class="blog-post__meta">
@@ -30,6 +31,9 @@ export default {
   props: {
     post: {
       required: true,
+    },
+    share: {
+      default: false,
     },
   },
   components: {

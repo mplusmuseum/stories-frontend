@@ -5,7 +5,7 @@
       <share-bar v-if="share"
         class="sharebar--horizontal"
         :limit="0"
-        :url="share.location"
+        :url="share.url"
         :title="share.title"></share-bar>
     </div>
     <div class="lightbox__inner">

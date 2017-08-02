@@ -12,7 +12,7 @@ export default function () {
       open(state, { image, share }) {
         state.active = true;
         state.image = image;
-        state.share = share;
+        state.share = share || false;
       },
       close(state) {
         state.active = false;

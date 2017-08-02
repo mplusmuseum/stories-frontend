@@ -16,10 +16,16 @@ export default {
     caption: {
       default: true,
     },
+    share: {
+      default: false,
+    },
   },
   methods: {
     lightbox() {
-      this.$store.commit('lightbox/open', { image: this.content[0] });
+      this.$store.commit('lightbox/open', {
+        image: this.content[0],
+        share: this.share,
+      });
     },
   },
 };

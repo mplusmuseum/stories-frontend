@@ -6,19 +6,19 @@
       <img src="../assets/img/pin.svg" alt="Pin Icon"> {{ $t(t.blog.pinned) }}
     </div>
 
-    <blog-post-header :post="post"></blog-post-header>
+    <blog-post-header :post="post" :share="shareData"></blog-post-header>
 
     <div class="blog-item__inner">
       <div class="blog-post__content row">
 
         <div class="blog-post__aside col-md-3">
           <share-bar class="blog-post__sharebar hide--mobile"
-          :url="shareData.location"
-          :title="$t(post.title)"></share-bar>
+          :url="shareData.url"
+          :title="shareData.title"></share-bar>
         </div>
 
         <div class="blog-post__body fs-b col-md-9">
-          <content-blocks :items="sections"></content-blocks>
+          <content-blocks :items="sections" :share="shareData"></content-blocks>
           <button class="blog-post__more button button--accent"
           v-if="post.truncated && post.sections.truncateAfter"
           @click="extend">{{ $t(t.site.continue) }}</button>
@@ -26,11 +26,11 @@
           <div class="blog-post__footer" v-if="showFooterContent">
 
             <share-bar class="blog-post__sharebar hide--desktop"
-            :url="shareData.location"
-            :title="$t(post.title)"></share-bar>
+            :url="shareData.url"
+            :title="shareData.title"></share-bar>
 
             <clipboard class="blog-post__footer-section"
-            :url="shareData.location"></clipboard>
+            :url="shareData.url"></clipboard>
 
             <newsletter-block class="blog-post__footer-section input-wrap--inline"
             :label="$t($store.state.site.translations.newsletter.placeholderAlt)"
@@ -86,7 +86,7 @@ export default {
     },
     shareData() {
       return {
-        location: `${this.url}/${this.lang}/blog/${this.post.name}`,
+        url: `${this.url}/${this.lang}/blog/${this.post.name}`,
         title: this.$t(this.post.title),
       };
     },

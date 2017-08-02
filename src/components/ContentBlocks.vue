@@ -3,6 +3,7 @@
     <component v-for="(item, i) of items"
     :key="i"
     :is="item.type"
+    :share="share"
     :content="item.content"></component>  
   </div>
 </template>
@@ -24,6 +25,9 @@ export default {
     items: {
       type: Array,
       required: true,
+    },
+    share: {
+      default: false,
     },
   },
   components: {

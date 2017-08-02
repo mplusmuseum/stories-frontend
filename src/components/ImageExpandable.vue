@@ -8,7 +8,15 @@
 export default {
   methods: {
     openLightbox(image) {
-      this.$store.commit('lightbox/open', { image });
+      this.$store.commit('lightbox/open', {
+        image,
+        share: this.share,
+      });
+    },
+  },
+  props: {
+    share: {
+      default: false,
     },
   },
 };
