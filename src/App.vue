@@ -352,7 +352,7 @@ a.tag {
     z-index: 1;
     left: 0;
     top: 0;
-    opacity: 0.5;
+    opacity: 0.75;
   }
   input {
     color: @accent;
