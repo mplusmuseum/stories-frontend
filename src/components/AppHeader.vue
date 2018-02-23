@@ -49,8 +49,10 @@
 
         <div class="header__section header__section--right header__icons">
 
-          <button class="header__icon" @click="toggleDropdown"
-          :aria-label="$tl('accessibility.btnNav')">
+          <button class="header__icon"
+          @click="toggleDropdown"
+          :aria-label="$tl('accessibility.btnNav')"
+          :data-prevent="prevent.dropdown">
 
             <img v-show="panel !== 'dropdown'"
             src="../assets/img/menu.svg"
@@ -64,7 +66,8 @@
 
           </button>
 
-          <button class="header__icon" @click="changeLanguage"
+          <button class="header__icon"
+          @click="changeLanguage"
           :aria-label="$tl('accessibility.btnLang')">
 
             <img v-if="lang === 'en'"
@@ -77,8 +80,10 @@
 
           </button>
 
-          <button class="header__icon" @click="toggleConnect"
-          :aria-label="$tl('accessibility.btnConnect')">
+          <button class="header__icon"
+          @click="toggleConnect"
+          :aria-label="$tl('accessibility.btnConnect')"
+          :data-prevent="prevent.connect">
 
             <img v-show="panel !== 'connect'"
             class="animate-wave"
@@ -96,7 +101,8 @@
           <button class="header__icon"
           v-if="searchEnabled"
           @click="toggleSearch"
-          :aria-label="$tl('accessibility.btnSearch')">
+          :aria-label="$tl('accessibility.btnSearch')"
+          :data-prevent="prevent.search">
 
             <img v-show="panel !== 'search'"
             src="../assets/img/search.svg"
