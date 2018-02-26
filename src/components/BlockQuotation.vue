@@ -1,9 +1,12 @@
 <template>
-  <div class="quotation-block block">
+  <div v-if="quote"
+  class="quotation-block block">
 
-    <div class="quotation-block__quote fs-m" v-html="$t(content.quote)"></div>
+    <div class="quotation-block__quote fs-m"
+    v-html="quote"></div>
 
-    <div class="quotation-block__attribution" v-if="content.attribution">
+    <div class="quotation-block__attribution"
+    v-if="content.attribution">
 
       &mdash; <span v-html="$t(content.attribution)"></span>
 
@@ -17,6 +20,11 @@ export default {
   props: {
     content: {
       required: true,
+    },
+  },
+  computed: {
+    quote() {
+      return this.$t(this.content.quote);
     },
   },
 };

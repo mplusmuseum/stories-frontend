@@ -1,5 +1,6 @@
 <template>
-  <div class="text-block block">
+  <div v-if="html"
+  class="text-block block">
 
     <div class="text-block__content"
     :class="modifier"
