@@ -32,6 +32,11 @@ export default {
       default: 'search',
     },
   },
+  data() {
+    return {
+      query: '',
+    };
+  },
   mounted() {
     window.addEventListener('keydown', this.keyHandler);
     window.addEventListener('mousedown', this.clickHandler);
@@ -63,16 +68,6 @@ export default {
     },
     close() {
       this.$emit('update:active', false);
-    },
-  },
-  computed: {
-    query: {
-      get() {
-        return this.$store.state.search.query;
-      },
-      set(value) {
-        this.$store.commit('search/setQuery', value);
-      },
     },
   },
 };
