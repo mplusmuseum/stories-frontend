@@ -67,7 +67,7 @@ const serve = (filepath, cache) => express.static(resolve(filepath), {
 });
 
 app.use(compression({ threshold: 0 }));
-const faviconPath = path.join('./public/logo-48.png');
+const faviconPath = path.join(__dirname, 'public', 'logo-48.png');
 app.use(favicon(faviconPath));
 app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
