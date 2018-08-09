@@ -7,4 +7,4 @@ sudo npm i -g npm
 sudo npm install
 sudo npm run build
 
-pm2 restart plus
+pm2 restart mplusmuseum-stories
