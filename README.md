@@ -68,7 +68,7 @@ npm start
 
 In production, the use of [pm2](http://pm2.keymetrics.io/) to run the application is recommended.
 ``` bash
-pm2 start npm --name "plus" -- start
+pm2 start npm --name "mplusmuseum-stories" -- start
 ```
 
 ## Built With
@@ -84,7 +84,7 @@ We welcome your contributions. If you have an addition or correction, please for
 
 Design and build by [Zak Group](https://www.zakgroup.co.uk/).
 
-[Rupert Dunk](https://github.com/rdunk), Teo Furtado, [Zak Kyes](https://www.zakgroup.co.uk/office/zak-kyes).
+[Rupert Dunk](https://rupertdunk.com/), [Teo Furtado](https://teofurtado.com/), [Zak Kyes](https://www.zakgroup.co.uk/office/zak-kyes).
 
 Credit to the official [Vue Hacker News Clone](https://github.com/vuejs/vue-hackernews-2.0/) for providing the original project structure and build processes.
 
