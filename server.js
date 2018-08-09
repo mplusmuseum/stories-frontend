@@ -67,7 +67,8 @@ const serve = (filepath, cache) => express.static(resolve(filepath), {
 });
 
 app.use(compression({ threshold: 0 }));
-app.use(favicon(resolve('./public/logo-48.png')));
+const faviconPath = path.join('./public/logo-48.png');
+app.use(favicon(faviconPath));
 app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 app.use('/manifest.json', serve('./manifest.json', true));
