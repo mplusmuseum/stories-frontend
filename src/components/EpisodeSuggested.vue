@@ -107,6 +107,7 @@ export default {
     width: 100%;
     overflow: hidden;
     display: flex;
+    justify-content: center;
     margin: 0 -0.25em;
   }
   &__item {
