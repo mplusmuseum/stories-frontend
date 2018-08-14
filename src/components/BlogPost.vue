@@ -12,7 +12,8 @@
 
         </div>
 
-        <blog-post-hero :post="post"/>
+        <blog-post-hero :post="post"
+        :key="`hero-${post.id}`"/>
 
         <div class="panel__inner">
         
@@ -87,7 +88,7 @@
         <app-suggested class="blog-post__suggested"
         v-if="!post.truncated && post.related"
         :id="post.id"
-        :key="post.id"/>
+        :key="`suggested-${post.id}`"/>
 
       </template>
     
