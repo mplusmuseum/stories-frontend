@@ -66,8 +66,8 @@ export default {
       }
       // eslint-disable-next-line no-undef
       const formData = new FormData(this.$el);
-      return asyncPost('data/newsletter/', formData).then(() => {
-        this.success();
+      return asyncPost('data/newsletter/', formData).then(({ data }) => {
+        this.success(data);
       }).catch(({ data }) => {
         this.error(data.errors[0] || 'There was a network error. Please try again later');
       });
@@ -79,10 +79,16 @@ export default {
       });
       this.busy = false;
     },
-    success() {
+    success({ success }) {
+      const title = success
+        ? 'newsletter.successTitle'
+        : 'newsletter.existingTitle';
+      const message = success
+        ? 'newsletter.successMessage'
+        : 'newsletter.existingMessage';
       this.$modal.show({
-        message: this.$tl('newsletter.successMessage'),
-        title: this.$tl('newsletter.successTitle'),
+        message: this.$tl(message),
+        title: this.$tl(title),
       });
       this.email = '';
       this.busy = false;
