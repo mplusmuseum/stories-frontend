@@ -1,8 +1,8 @@
 <template>
   <div class="content-blocks">
 
-    <component v-for="(item, i) of items"
-    :key="i"
+    <component v-for="item of items"
+    :key="item.id"
     :is="`block-${item.type}`"
     :content="item.content"/>
 
