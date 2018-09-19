@@ -1,6 +1,6 @@
 <template>
-  <article class="blog-item blog-post"
-  :class="{ 'blog-post--truncated': post.truncated }">
+  <article class="blog-item blog-post footnotes"
+  :class="[{ 'blog-post--truncated': post.truncated }, modifiers]">
 
     <app-panel>
 
@@ -106,8 +106,10 @@ import BlogPostHero from './BlogPostHero.vue';
 import ContentBlocks from './ContentBlocks.vue';
 import ShareBar from './ShareBar.vue';
 import SnippetByline from './SnippetByline.vue';
+import { footnoteMixin } from '../util/mixins';
 
 export default {
+  mixins: [footnoteMixin('post')],
   data() {
     return {
       busy: false,

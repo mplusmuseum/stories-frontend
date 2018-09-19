@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import VideoFrame from '../components/VideoFrame.vue';
 
 export const videoFrameMixin = {
@@ -95,3 +96,24 @@ export const itemMixin = {
     },
   },
 };
+
+export const footnoteMixin = name => ({
+  computed: {
+    footnotes() {
+      if (!this[name].content) return [];
+
+      return _.reduce(this[name].content.list, (footnotes, block) => {
+        if (block.content.footnotes) {
+          const newLocaled = this.$t(block.content.footnotes);
+          return [...footnotes, ...newLocaled];
+        }
+        return footnotes;
+      }, []);
+    },
+    modifiers() {
+      if (!this[name].content) return null;
+      const footnoteBlock = _.find(this[name].content.list, block => block.type === 'footnotes');
+      return footnoteBlock ? `footnotes--${this.$t(footnoteBlock.content.style)}` : null;
+    },
+  },
+});

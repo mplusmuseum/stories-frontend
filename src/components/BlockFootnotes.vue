@@ -28,14 +28,11 @@
 export default {
   computed: {
     footnotes() {
-      if (this.content.footnotes) {
-        return this.content.footnotes;
-      }
-      if (this.$parent.$parent) {
-        const { footnotes = [] } = this.$parent.$parent;
-        return footnotes;
-      }
-      return [];
+      const footnotes = this.content.footnotes
+        || this.$parent.$parent.footnotes
+        || this.$parent.$parent.$parent.footnotes
+        || [];
+      return footnotes;
     },
   },
   props: {

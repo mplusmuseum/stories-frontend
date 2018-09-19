@@ -1,5 +1,5 @@
 <template>
-  <article class="article shadow--dark"
+  <article class="article shadow--dark footnotes"
   :class="modifiers">
 
     <app-banner v-if="article.hero"
@@ -35,12 +35,13 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import ContentBlocks from '../components/ContentBlocks.vue';
 import JournalArticleHeader from '../components/JournalArticleHeader.vue';
 import ShareBar from '../components/ShareBar.vue';
+import { footnoteMixin } from '../util/mixins';
 
 export default {
+  mixins: [footnoteMixin('article')],
   props: {
     article: {
       required: true,
@@ -65,24 +66,6 @@ export default {
         location,
         title: this.$t(text),
       };
-    },
-    footnotes() {
-      if (!this.article.content) return [];
-
-      return _.reduce(this.article.content.list, (footnotes, block) => {
-        if (block.content.footnotes) {
-          const newLocaled = this.$t(block.content.footnotes);
-          return [...footnotes, ...newLocaled];
-        }
-        return footnotes;
-      }, []);
-    },
-    modifiers() {
-      if (!this.article.content) return null;
-      const footnoteBlock = _.find(this.article.content.list, block => block.type === 'footnotes');
-      return footnoteBlock
-        ? `article--${this.$t(footnoteBlock.content.style)}`
-        : null;
     },
   },
   methods: {
@@ -114,7 +97,6 @@ export default {
   &__content {
     padding-top: 3em;
     padding-bottom: 3em;
-    counter-reset: footnotesinline;
   }
   &__header {
     margin-bottom: 2em;
@@ -191,14 +173,6 @@ export default {
       height: 100%;
       background: @accent;
     }
-  }
-  &--lower-roman {
-    .text-block .footnote a:after { content: counter(footnotesinline, lower-roman); }
-    .footnotes-block li:before { content: counter(footnotesblock, lower-roman) " "; }
-  }
-  &--lower-latin {
-    .text-block .footnote a:after { content: counter(footnotesinline, lower-latin); }
-    .footnotes-block li:before { content: counter(footnotesblock, lower-latin) " "; }
   }
   .banner {
     cursor: zoom-in;
