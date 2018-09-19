@@ -700,4 +700,16 @@ a.tag {
   border: 0 !important;
 }
 
+.footnotes {
+  counter-reset: footnotesinline;
+  &--lower-roman {
+    .text-block .footnote a:after { content: counter(footnotesinline, lower-roman); }
+    .footnotes-block li:before { content: counter(footnotesblock, lower-roman) " "; }
+  }
+  &--lower-latin {
+    .text-block .footnote a:after { content: counter(footnotesinline, lower-latin); }
+    .footnotes-block li:before { content: counter(footnotesblock, lower-latin) " "; }
+  }
+}
+
 </style>
