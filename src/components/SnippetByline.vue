@@ -1,9 +1,10 @@
 <template>
   <snippet-translate class="byline"
   :snippet="this.snippet"
-  :data="{ author, categories, date }"
+  :data="{ author, authors, categories, date }"
   :parsers="{
     author: parseAuthor,
+    authors: parseAuthors,
     categories: parseCategories,
     date: parseDate,
   }"/>
@@ -28,11 +29,32 @@ export default {
     author: {
       type: Number,
     },
+    authors: {
+      type: Array,
+    },
     link: {
       default: true,
     },
   },
   methods: {
+    naturalList(items) {
+      const separator = this.$t({ en: ', ', tc: '、' });
+      const conjunction = this.$t({ en: ' and ', tc: '及' });
+      const conjunctionOxford = this.$t({ en: ', and ', tc: '及' });
+
+      return items.reverse().reduce((arr, auth, index) => {
+        if (index === 1) {
+          if (items.length > 2) {
+            arr.push(conjunctionOxford);
+          } else {
+            arr.push(conjunction);
+          }
+        }
+        if (index > 1) arr.push(separator);
+        arr.push(auth);
+        return arr;
+      }, []).reverse();
+    },
     parseAuthor(id, h) {
       if (!id) return false;
       const author = this.$store.state.site.authors[id];
@@ -50,6 +72,26 @@ export default {
         },
         this.$t(author.title),
       ) : h('span', {}, this.$t(author.title));
+    },
+    parseAuthors(ids, h) {
+      if (!ids || !ids.length) return false;
+      const el = this.link ? 'router-link' : 'span';
+      const authors = ids.map((id) => {
+        const author = this.$store.state.site.authors[id];
+        const opts = this.link ? {
+          props: {
+            to: {
+              name: 'search',
+              query: {
+                q: this.$t(author.title),
+              },
+            },
+          },
+        } : {};
+        return h(el, opts, this.$t(author.title));
+      });
+
+      return this.naturalList(authors);
     },
     // Blog only
     parseCategories(categories, h) {

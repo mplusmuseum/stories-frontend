@@ -41,6 +41,7 @@
       <snippet-byline class="fs-s fs-b-sm hide--mobile"
       snippet="journal.byline"
       :author="content.author"
+      :authors="content.authors"
       :date="content.date"/>
 
       <tag-group class="fs-s fs-b-sm"
