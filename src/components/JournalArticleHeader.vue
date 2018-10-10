@@ -27,7 +27,7 @@
       <snippet-byline
       snippet="journal.byline"
       :author="article.author"
-      :authors="post.authors"
+      :authors="article.authors"
       :date="article.date"/>
 
     </div>
