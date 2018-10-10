@@ -85,7 +85,7 @@ export default {
   }
 
   blockquote {
-    color: @grey;
+    color: @black;
     margin: 0 2em 1em 2em;
     padding: 0;
   }
