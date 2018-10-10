@@ -18,6 +18,7 @@
     <snippet-byline class="fs-s fs-b-sm hide--mobile"
     snippet="journal.byline"
     :author="content.author"
+    :authors="content.authors"
     :date="content.date"
     :link="false"/>
 
@@ -37,6 +38,7 @@ export default {
       default: false,
     },
   },
+  // @TODO Is this used?
   computed: {
     byline() {
       // @TODO Make translation authorable ?
