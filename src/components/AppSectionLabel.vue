@@ -39,3 +39,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.external-icon {
+  height: 1em;
+  margin-left: 0.125em;
+}
+</style>

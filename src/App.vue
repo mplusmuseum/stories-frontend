@@ -231,6 +231,7 @@ a.lang-secondary {
   border: none;
   padding: 0.4em 0.6em;
   font-weight: @fontBold;
+  text-shadow: none;
   .shadow--small;
   &:hover, &:focus {
     background: @lightgrey;
@@ -513,6 +514,10 @@ a.tag {
       height: 0.75em;
       width: 0.75em;
     }
+    .button {
+      margin: 0.25em
+    }
+
   }
   video::-webkit-media-controls-start-playback-button {
     display: none !important;
