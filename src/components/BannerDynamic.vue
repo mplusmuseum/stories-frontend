@@ -30,10 +30,25 @@
 
     </div>
 
+    <div v-else-if="content.type === 'exhibition'"
+    class="banner__meta fs-b">
+
+      <app-link v-for="(button, i) of content.links"
+      :key="i"
+      :link="button.link">
+
+        <div class="button button--accent"
+        v-html="$tl(`exhibitions.${button.translation}`)"/>
+
+      </app-link>
+
+    </div>
+
   </app-banner>
 </template>
 
 <script>
+import AppLink from './AppLink.vue';
 import SnippetTranslate from './SnippetTranslate.vue';
 import { labelMixin } from '../util/mixins';
 
@@ -45,6 +60,7 @@ export default {
     },
   },
   components: {
+    AppLink,
     SnippetTranslate,
   },
 };

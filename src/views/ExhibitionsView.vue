@@ -45,6 +45,19 @@
           wrap="h2"
           :title="exhibition.title"/>
 
+          <div class="banner__meta fs-b">
+
+            <app-link v-for="(button, i) of exhibition.links"
+            :key="i"
+            :link="button.link">
+
+              <div class="button button--accent"
+              v-html="$tl(`exhibitions.${button.translation}`)"/>
+
+            </app-link>
+
+          </div>
+
         </app-banner>
 
       </div>
@@ -68,6 +81,7 @@ import { mapState } from 'vuex';
 
 import meta from '../util/meta';
 import SectionHeader from '../components/SectionHeader.vue';
+import AppLink from '../components/AppLink.vue';
 import AppSticky from '../components/AppSticky.vue';
 
 export default {
@@ -123,6 +137,7 @@ export default {
     },
   },
   components: {
+    AppLink,
     AppSticky,
     SectionHeader,
   },
