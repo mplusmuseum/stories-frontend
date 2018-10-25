@@ -51,8 +51,16 @@
             :key="i"
             :link="button.link">
 
-              <div class="button button--accent"
-              v-html="$tl(`exhibitions.${button.translation}`)"/>
+              <div class="button button--accent">
+
+                <span v-html="$tl(`exhibitions.${button.translation}`)"/>
+
+                <img v-if="typeof button.link === 'string'"
+                class="external-icon"
+                src="../assets/img/external.svg"
+                :alt="$tl('accessibility.externalLink')">
+
+              </div>
 
             </app-link>
 
