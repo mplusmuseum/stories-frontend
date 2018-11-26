@@ -17,8 +17,15 @@ export default function () {
       socialShareables(state) {
         return state.social.filter(platform => platform.share);
       },
-      socialLinkables(state) {
-        return state.social.filter(platform => platform.link);
+      socialLinkables(state, getters, rootState) {
+        const { lang } = rootState;
+        return state.social.reduce((platforms, platform) => {
+          if (platform.links[lang]) {
+            const plat = { ...platform, link: platform.links[lang] };
+            platforms.push(plat);
+          }
+          return platforms;
+        }, []);
       },
     },
     actions: {

@@ -6,16 +6,7 @@
       <h6 class="infopanel__header"
       v-html="$tl('site.connect')"></h6>
 
-      <div class="social-links fs-s">
-
-        <a v-for="platform of socialPlatforms"
-        :key="platform.id"
-        :href="platform.link"
-        target="_blank"
-        :aria-label="`${$tl('accessibility.externalLink')} ${$t(platform.title)}`"
-        v-html="platform.svg"></a>
-
-      </div>
+      <social-links class="fs-s"/>
 
     </div>
 
@@ -38,6 +29,7 @@
 
 <script>
 import AppNewsletter from './AppNewsletter.vue';
+import SocialLinks from './SocialLinks.vue';
 
 export default {
   props: {
@@ -79,6 +71,7 @@ export default {
   },
   components: {
     AppNewsletter,
+    SocialLinks,
   },
 };
 </script>

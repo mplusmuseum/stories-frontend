@@ -19,21 +19,23 @@
 
       </div>
 
-      <div class="footer__social footer__section social-links">
-
-        <a v-for="platform of $store.getters['site/socialLinkables']"
-        :key="platform.id"
-        :href="platform.link"
-        target="_blank"
-        :aria-label="`${$tl('accessibility.externalLink')} ${$t(platform.title)}`"
-        v-html="platform.svg"></a>
-
-      </div>
+      <social-links class="footer__social footer__section"/>
 
     </div>
 
   </footer>
 </template>
+
+<script>
+import SocialLinks from './SocialLinks.vue';
+
+export default {
+  components: {
+    SocialLinks,
+  },
+};
+</script>
+
 
 <style lang="less">
 @import "../less/variables.less";

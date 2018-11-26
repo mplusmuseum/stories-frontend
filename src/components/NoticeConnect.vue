@@ -42,15 +42,7 @@
       v-else-if="connect === 'social'"
       key="social">
 
-        <div class="social-links fs-b">
-
-          <a v-for="platform of $store.getters['site/socialLinkables']"
-          :key="platform.id"
-          :href="platform.link"
-          target="_blank"
-          :aria-label="`${$tl('accessibility.externalLink')} ${$t(platform.title)}`"
-          v-html="platform.svg"></a>
-
+        <social-links class="fs-b">
           <button @click.prevent="connect = false">
 
             <img class="notice-connect__close"
@@ -58,8 +50,7 @@
             :alt="$tl('accessibility.hideSocial')">
 
           </button>
-
-        </div>
+        </social-links>
 
       </div>
 
@@ -70,6 +61,7 @@
 
 <script>
 import AppNewsletter from '../components/AppNewsletter.vue';
+import SocialLinks from '../components/SocialLinks.vue';
 import SnippetTranslate from './SnippetTranslate.vue';
 
 export default {
@@ -111,6 +103,7 @@ export default {
   components: {
     AppNewsletter,
     SnippetTranslate,
+    SocialLinks,
   },
 };
 </script>
