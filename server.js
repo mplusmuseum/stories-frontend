@@ -11,6 +11,7 @@ const compression = require('compression');
 const axios = require('axios');
 const http = require('http');
 const https = require('https');
+const sitemap = require('./src/sitemap');
 
 const resolve = file => path.resolve(__dirname, file);
 const { createBundleRenderer } = require('vue-server-renderer');
@@ -193,17 +194,15 @@ app.get('/status', (req, res) => {
 });
 
 // Sitemap
-app.get('/sitemap.xml', (req, res) => {
-  const endpoint = `${process.env.API_URL}/data/sitemap/`;
-  res.setHeader('Server', serverInfo);
-  axios.get(endpoint)
-    .then(({ data }) => require('./src/sitemap')(data, res))
-    .catch((err) => {
-      console.log(`Failed to get site map from ${endpoint}.`);
-      console.log(err);
-      return res.status(500).end();
-    });
-});
+const sitemapRoute = sitemap(app, serverInfo);
+const sitemapEndpoint = `${process.env.API_URL}/data/sitemap/`;
+const sitemapEndpoints = {
+  en: `${sitemapEndpoint}?lang=en`,
+  tc: `${sitemapEndpoint}?lang=tc`,
+};
+app.get(sitemapEndpoint, (req, res) => res.redirect(sitemapEndpoints.en));
+sitemapRoute('/en/sitemap.xml', sitemapEndpoints.en);
+sitemapRoute('/tc/sitemap.xml', sitemapEndpoints.tc);
 
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
