@@ -30,6 +30,13 @@
             <app-title class="item__title"
             wrap="h4"
             :title="item.title"/>
+            
+            <div class="item__meta fs-s">
+
+              <img src="../assets/img/clock-black.svg"
+              :alt="$tl('accessibility.duration')">&thinsp;<span v-html="$t(item.duration)"></span>
+
+            </div>
 
           </router-link>
 

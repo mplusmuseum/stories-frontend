@@ -293,7 +293,13 @@ export default {
     }
 		&__inner {
 			position: relative;
-		}
+    }
+    &__meta {
+      img {
+        height: 0.75em;
+        width: 0.75em;
+      }
+    }
 	}
   .panel {
     margin-bottom: 0;

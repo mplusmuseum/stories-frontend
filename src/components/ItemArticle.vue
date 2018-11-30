@@ -13,6 +13,13 @@
           wrap="h4"
           :title="item.title"/>
 
+          <div class="item__meta fs-s">
+
+            <img src="../assets/img/clock-black.svg"
+            :alt="$tl('accessibility.duration')">&thinsp;<span v-html="$t(item.duration)"></span>
+
+          </div>
+
         </router-link>
 
         <div class="item__text fs-b">
@@ -78,7 +85,8 @@ export default {
 
 .item--article {
   .item {
-    &__title {
+    &__meta {
+      margin-top: 0.125em;
       margin-bottom: 0.25em;
     }
     &__text {
