@@ -39,8 +39,10 @@ export default {
       : Promise.resolve();
 
     scriptLoaded.then(() => {
-      window.instgrm.Embeds.process();
       this.isPostLoaded = true;
+      this.$nextTick().then(() => {
+        window.instgrm.Embeds.process();
+      });
     });
   },
 };
