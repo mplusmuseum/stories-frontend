@@ -26,12 +26,28 @@ function redirectWithLang(name) {
   return to => ({ name, params: withLocale(to.params) });
 }
 
-const homeRoutes = [
-  {
-    name: 'home',
-    path: `/${langParam}/`,
-    component: HomeView,
+function enforcedSlashRoute(route) {
+  return [{
+    name: route.name,
+    path: `${route.path}/`,
+    component: route.component,
+    pathToRegexpOptions: {
+      strict: true,
+    },
   }, {
+    name: `${route.name}-slash-redirect`,
+    path: route.path,
+    redirect: { name: route.name },
+  }];
+}
+
+const homeRoutes = [
+  ...enforcedSlashRoute({
+    name: 'home',
+    path: `/${langParam}`,
+    component: HomeView,
+  }),
+  {
     name: 'default',
     path: '/',
     redirect: redirectWithLang('home'),
@@ -45,13 +61,13 @@ const notFoundRoute = {
 };
 
 const pageRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'page',
-    path: `/${langParam}/:page/`,
+    path: `/${langParam}/:page`,
     component: PageView,
-  }, {
+  }), {
     name: 'page-redirect',
-    path: '/page/:page/',
+    path: '/page/:page',
     redirect: redirectWithLang('page'),
   },
 ];
@@ -69,11 +85,11 @@ const catchRoutes = [
 ];
 
 const exploreRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'explore',
     path: `/${langParam}/explore`,
     component: ExploreView,
-  }, {
+  }), {
     name: 'explore-redirect',
     path: '/explore',
     redirect: redirectWithLang('explore'),
@@ -81,11 +97,11 @@ const exploreRoutes = [
 ];
 
 const searchRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'search',
     path: `/${langParam}/search`,
     component: SearchView,
-  }, {
+  }), {
     name: 'search-redirect',
     path: '/search',
     redirect: redirectWithLang('search'),
@@ -93,19 +109,22 @@ const searchRoutes = [
 ];
 
 const blogRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'blog',
-    path: `/${langParam}/blog/`,
+    path: `/${langParam}/blog`,
     component: BlogListView,
-  }, {
+  }),
+  ...enforcedSlashRoute({
     name: 'post',
-    path: `/${langParam}/blog/:post/`,
+    path: `/${langParam}/blog/:post`,
     component: BlogPostView,
-  }, {
+  }),
+  {
     name: 'blog-redirect',
     path: '/blog',
     redirect: redirectWithLang('blog'),
-  }, {
+  },
+  {
     name: 'post-redirect',
     path: '/blog/:post',
     redirect: redirectWithLang('post'),
@@ -113,21 +132,23 @@ const blogRoutes = [
 ];
 
 const journalRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'journal',
-    path: `/${langParam}/podium/`,
+    path: `/${langParam}/podium`,
     component: JournalView,
-  }, {
+  }),
+  ...enforcedSlashRoute({
     name: 'issue',
-    path: `/${langParam}/podium/:issue/`,
+    path: `/${langParam}/podium/:issue`,
     component: IssueView,
-  }, {
+  }),
+  ...enforcedSlashRoute({
     name: 'article',
-    path: `/${langParam}/podium/:issue/:article/`,
+    path: `/${langParam}/podium/:issue/:article`,
     component: ArticleView,
-  }, {
+  }), {
     name: 'journal-redirect',
-    path: '/podium/',
+    path: '/podium',
     redirect: redirectWithLang('journal'),
   }, {
     name: 'issue-redirect',
@@ -135,39 +156,40 @@ const journalRoutes = [
     redirect: redirectWithLang('issue'),
   }, {
     name: 'article-redirect',
-    path: '/podium/:issue/:article/',
+    path: '/podium/:issue/:article',
     redirect: redirectWithLang('article'),
   },
 ];
 
 const channelRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'channel',
-    path: `/${langParam}/channel/`,
+    path: `/${langParam}/channel`,
     component: ChannelView,
-  }, {
+  }),
+  ...enforcedSlashRoute({
     name: 'episode',
-    path: `/${langParam}/channel/:episode/`,
+    path: `/${langParam}/channel/:episode`,
     component: EpisodeView,
-  }, {
+  }), {
     name: 'channel-redirect',
-    path: '/channel/',
+    path: '/channel',
     redirect: redirectWithLang('channel'),
   }, {
     name: 'episode-redirect',
-    path: '/channel/:episode/',
+    path: '/channel/:episode',
     redirect: redirectWithLang('episode'),
   },
 ];
 
 const exhibitionsRoutes = [
-  {
+  ...enforcedSlashRoute({
     name: 'exhibitions',
-    path: `/${langParam}/interactives/`,
+    path: `/${langParam}/interactives`,
     component: ExhibitionsView,
-  }, {
+  }), {
     name: 'exhibitions-redirect',
-    path: '/interactives/',
+    path: '/interactives',
     redirect: redirectWithLang('exhibitions'),
   },
 ];

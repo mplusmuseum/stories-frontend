@@ -27,7 +27,7 @@ export default {
       const { route } = this.$store.state;
       if (name) {
         const path = route.path.replace(/\/$/, '');
-        url += `${path}/${name}`;
+        url += `${path}/${name}/`;
       } else {
         url += route.fullPath;
       }
