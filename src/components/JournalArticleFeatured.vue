@@ -16,7 +16,7 @@
     :title="content.title"/>
 
     <snippet-byline class="fs-s fs-b-sm hide--mobile"
-    snippet="journal.byline"
+    :snippet="`journal.${content.byline_type}`"
     :author="content.author"
     :authors="content.authors"
     :date="content.date"

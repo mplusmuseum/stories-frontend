@@ -25,7 +25,7 @@
     <div class="heading">
 
       <snippet-byline
-      snippet="journal.byline"
+      :snippet="`journal.${article.byline_type}`"
       :author="article.author"
       :authors="article.authors"
       :date="article.date"/>
