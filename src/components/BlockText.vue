@@ -30,7 +30,7 @@ export default {
       return html;
     },
     modifier() {
-      if (this.content.modifier === 'small') return 'fs-s';
+      if (this.content.modifier === 'small') return 'fs-xs';
       return false;
     },
   },
