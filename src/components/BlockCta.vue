@@ -1,5 +1,5 @@
 <template>
-  <div class="button-block block">
+  <div class="button-block block" :class="alignmentClass">
     <a
     v-if="isExternalLink"
     class="button button--accent"
@@ -33,6 +33,26 @@ export default {
     isExternalLink() {
       return isHttpLink.test(this.link);
     },
+    alignmentClass() {
+      return this.content.align
+        ? `button-block--align-${this.content.align}`
+        : null;
+    },
   },
 };
 </script>
+
+<style lang="less">
+.button-block {
+  &--align-left {
+    text-align: left;
+  }
+  &--align-center {
+    text-align: center;
+  }
+  &--align-right {
+    text-align: right;
+  }
+}
+</style>
+
