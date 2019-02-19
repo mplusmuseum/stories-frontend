@@ -169,7 +169,7 @@ export default {
     ...mapState({
       lang: s => s.lang,
       routeQuery: s => s.route.query,
-      menuItems: s => s.site.links.menu,
+      menuItems: s => s.site.links.menu_universal,
       notice: s => s.header.notice,
     }),
     searchEnabled() {
