@@ -125,6 +125,7 @@
         <app-header-dropdown v-if="panel === 'dropdown'"
         key="dropdown"
         :items="menuItems"
+        :mplusItem="mplusItem"
         :active.sync="panel"
         :prevent="prevent.dropdown"/>
 
@@ -170,6 +171,7 @@ export default {
       lang: s => s.lang,
       routeQuery: s => s.route.query,
       menuItems: s => s.site.links.menu_universal,
+      mplusItem: s => s.site.links.mplus,
       notice: s => s.header.notice,
     }),
     searchEnabled() {
@@ -193,16 +195,22 @@ export default {
       this.panel = (this.panel === 'connect')
         ? false
         : 'connect';
+      this.toggleBlurredContent();
     },
     toggleDropdown() {
       this.panel = (this.panel === 'dropdown')
         ? false
         : 'dropdown';
+      this.toggleBlurredContent();
     },
     toggleSearch() {
       this.panel = (this.panel === 'search' || this.$store.state.route.name === 'search')
         ? false
         : 'search';
+      this.toggleBlurredContent();
+    },
+    toggleBlurredContent() {
+      this.$store.commit('header/updateBlurredContent', this.panel);
     },
   },
   components: {
@@ -345,19 +353,88 @@ export default {
   .dropdown {
     position: absolute;
     right: 0;
+  }
+  .dropdown-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dropdown-list-item {
+    display: block;
+    margin-top: 0.2em;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    &__item {
-      display: block;
-      margin-top: 0.2em;
-      padding: 0.1em 0.4em;
+  }
+  .dropdown-link {
+    display: block;
+    padding: 0.15em 0.4em 0.05em 0.4em;
+    background: @white;
+    color: @accent;
+    border-bottom: 3px solid transparent;
+    transition: .125s ease border-color;
+    &:hover, &:focus {
+      border-color: @accent;
+    }
+    &.small {
       background: @accent;
-      transition: .125s ease border-color;
-      border-bottom: 3px solid transparent;
-      &.router-link-active, &:hover, &:focus {
-        border-color: @white;
+      color: @white;
+      border: none;
+      padding: 0.3em 0.4em;
+      font-weight: @fontBold;
+      transition: .15s ease transform;
+      .mq-md({
+        padding: 0.4em 0.5em;
+      });
+      &:hover, &:focus {
+        outline: none;
+        transform: scale(1.1);
       }
+    }
+    &--parent {
+      padding: 0.1em 0.4em 0.1em 0.4em;
+      font-family: "DTLProkyonSTBold",
+      "PLUS", Helvetica, Arial, "PingFang HK", "蘋方-港", "HanHei TC", "Heiti TC", "STHeiti", "Microsoft JhengHei UI", "Microsoft JhengHei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+    }
+    &--child {
+      background: @accent;
+      color: @white;
+      &:hover, &:focus {
+        border-bottom-color: @white;
+      }
+      &.small {
+        background: @lightgrey;
+        color: @accent;
+      }
+    }
+    &--external {
+      span {
+        &:after {
+          background-image: url('../assets/img/external-blue.svg');
+          display: inline-block;
+          width: 0.6em;
+          height: 0.6em;
+          vertical-align: top;
+          content: '',
+        }
+      }
+    }
+  }
+  .dropdown-social-links {
+    a {
+      margin-right: 0;
+      box-shadow: @shadowStyle;
+      background: @lightgrey;
+      padding: 0.2em 0.3em;
+      width: 2.9em;
+      height: 2.9em;
+      .mq-md({
+        width: 2em;
+        height: 2em;
+      });
+    }
+    svg g {
+      fill: @accent;
     }
   }
 }
