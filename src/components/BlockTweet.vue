@@ -19,21 +19,37 @@ export default {
       : Promise.resolve();
 
     scriptLoaded.then(() => {
-      window.twttr.widgets.createTweetEmbed(this.$t(this.content), this.$el, this.options);
+      window.twttr.widgets.createTweetEmbed(
+        this.$t(this.content.media),
+        this.$refs.media, this.options,
+      );
       this.isTweetLoaded = true;
     });
   },
   render(h) {
-    return h('div', { class: 'tweet-block block' }, this.isTweetLoaded ? undefined : this.$slots.default);
+    const inner = h('div', { ref: 'media' }, this.isTweetLoaded ? undefined : this.$slots.default);
+    const caption = this.$t(this.content.caption)
+      ? h('div', {
+        class: 'tweet-block__caption fs-s',
+        domProps: { innerHTML: this.$t(this.content.caption) },
+      }) : null;
+    return h('div', { class: 'tweet-block block' }, [inner, caption]);
   },
 };
 </script>
 
 <style lang="less">
+@import '../less/variables.less';
+
 .tweet-block {
   .twitter-tweet {
     margin-left: auto;
     margin-right: auto;
+  }
+  &__caption {   
+    margin: 1rem auto;
+    max-width: 500px;
+    color: @midgrey;
   }
 }
 </style>

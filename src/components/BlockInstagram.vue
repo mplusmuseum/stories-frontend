@@ -10,6 +10,10 @@
 
     </blockquote>
 
+    <div v-if="caption"
+    class="instagram-block__caption fs-s"
+    v-html="caption"></div>
+
   </div>
 </template>
 
@@ -30,7 +34,10 @@ export default {
   },
   computed: {
     url() {
-      return `https://www.instagram.com/p/${this.$t(this.content)}/`;
+      return `https://www.instagram.com/p/${this.$t(this.content.media)}/`;
+    },
+    caption() {
+      return this.$t(this.content.caption);
     },
   },
   mounted() {
@@ -49,9 +56,15 @@ export default {
 </script>
 
 <style lang="less">
-  .instagram-block {
-    iframe {
-      width: 100%;
-    }
+@import '../less/variables.less';
+
+.instagram-block {
+  iframe {
+    width: 100%;
   }
+  &__caption {   
+    margin: 1rem 0;
+    color: @midgrey;
+  }
+}
 </style>
