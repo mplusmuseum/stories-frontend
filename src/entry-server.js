@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createApp } from './app';
 import locales from './locale';
 import promiseAllSoftFail from './util/promise-all-soft-fail';
