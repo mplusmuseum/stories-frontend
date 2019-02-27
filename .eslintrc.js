@@ -10,14 +10,6 @@ module.exports = {
     'html',
     'import',
   ],
-  // check if imports actually resolve
-  'settings': {
-    'import/resolver': {
-      'webpack': {
-        'config': 'build/webpack.base.config.js'
-      }
-    }
-  },
   // add your custom rules here
   'rules': {
     // don't require .vue extension when importing
