@@ -13,6 +13,12 @@ export const videoFrameMixin = {
 };
 
 export const blockMixin = {
+  props: {
+    index: {
+      type: Number,
+      required: false,
+    },
+  },
   computed: {
     modifierClass() {
       return this.content && this.content.modifier
@@ -101,14 +107,20 @@ export const footnoteMixin = name => ({
   computed: {
     footnotes() {
       if (!this[name].content) return [];
-
-      return _.reduce(this[name].content.list, (footnotes, block) => {
-        if (block.content.footnotes) {
+      const { sections } = _.reduceRight(this[name].content.list, (data, block, index) => {
+        if (block.type === 'footnotes') {
+          data.currentIndex += 1;
+          data.sections.push({ index, footnotes: [] });
+        } else if (block.content.footnotes) {
           const newLocaled = this.$t(block.content.footnotes);
-          return [...footnotes, ...newLocaled];
+          data.sections[data.currentIndex].footnotes.unshift(...newLocaled);
         }
-        return footnotes;
-      }, []);
+        return data;
+      }, {
+        currentIndex: -1,
+        sections: [],
+      });
+      return _.reverse(sections);
     },
     modifiers() {
       if (!this[name].content) return null;

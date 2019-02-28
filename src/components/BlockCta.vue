@@ -22,6 +22,10 @@ const isHttpLink = /^https?:\/\/[^\s/$.?#].[^\s]*$/;
 
 export default {
   props: {
+    index: {
+      type: Number,
+      required: false,
+    },
     content: {
       required: true,
     },
