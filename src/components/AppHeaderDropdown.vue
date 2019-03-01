@@ -42,8 +42,8 @@
             :key="i"
             class="dropdown-list-item">
 
-              <router-link class="dropdown__item shadow"
-              v-if="subitem.menu_subitem_type ==='page' && validate(subitem.link)"
+              <router-link class="dropdown-link dropdown-link--child shadow"
+              v-if="subitem.type ==='page' && validate(subitem.link)"
               :to="$link(subitem.link)">
 
                 <app-title class="app-title--same-size"
