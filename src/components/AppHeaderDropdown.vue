@@ -32,44 +32,40 @@
 
         </a>
 
-        <transition name="drop">
+        <ul v-if="item.subitems"
+        key="dropdown"
+        class="dropdown-list dropdown-list--children">
 
-          <ul v-if="(panels.indexOf(i) > -1 || isMobile) && item.subitems"
-          key="dropdown"
-          class="dropdown-list dropdown-list--children">
+          <li v-for="(subitem, i) of item.subitems"
+          :key="i"
+          class="dropdown-list-item">
 
-            <li v-for="(subitem, i) of item.subitems"
-            :key="i"
-            class="dropdown-list-item">
+            <router-link class="dropdown-link dropdown-link--child shadow"
+            v-if="subitem.type ==='page' && validate(subitem.link)"
+            :to="$link(subitem.link)">
 
-              <router-link class="dropdown-link dropdown-link--child shadow"
-              v-if="subitem.type ==='page' && validate(subitem.link)"
-              :to="$link(subitem.link)">
+              <app-title class="app-title--same-size"
+              :title="subitem.title"/>
 
-                <app-title class="app-title--same-size"
-                :title="subitem.title"/>
+            </router-link>
 
-              </router-link>
+            <a v-else
+            :href="subitem.link"
+            class="dropdown-link dropdown-link--child shadow"
+            :class="{ 'small fs-s' : subitem.link_type === 'external' }">
 
-              <a v-else
-              :href="subitem.link"
-              class="dropdown-link dropdown-link--child shadow"
-              :class="{ 'small fs-s' : subitem.link_type === 'external' }">
+              <span v-if="subitem.link_type === 'external'"
+              v-html="$t(subitem.title)"/>
 
-                <span v-if="subitem.link_type === 'external'"
-                v-html="$t(subitem.title)"/>
+              <app-title v-else
+              class="app-title--same-size"
+              :title="subitem.title"/>
 
-                <app-title v-else
-                class="app-title--same-size"
-                :title="subitem.title"/>
+            </a>
 
-              </a>
+          </li>
 
-            </li>
-
-          </ul>
-
-        </transition>
+        </ul>
 
       </li>
 
