@@ -6,7 +6,7 @@
       <li v-if="mplusItem.link"
       class="dropdown-list-item">
 
-        <a :href="mplusItem.link"
+        <a :href="$t(mplusItem.link)"
         target="_blank"
         class="dropdown-link dropdown-link--mplus shadow small fs-s">
 
@@ -22,7 +22,7 @@
         class="dropdown-list-item"
         @mouseenter="isMobile || !item.subitems ? null : addDropdown(i)">
 
-        <a :href="item.link"
+        <a :href="linkHref(item.link)"
         :target="linkTarget(item.link_type)"
         class="dropdown-link dropdown-link--parent shadow"
         :class="{ 'dropdown-link--external' : item.link_type === 'external' }">
@@ -50,7 +50,7 @@
             </router-link>
 
             <a v-else
-            :href="subitem.link"
+            :href="linkHref(subitem.link)"
             class="dropdown-link dropdown-link--child shadow"
             :class="{ 'small fs-s' : subitem.link_type === 'external' }">
 
@@ -146,6 +146,11 @@ export default {
       return type === 'external'
         ? '_blank'
         : '_self';
+    },
+    linkHref(link) {
+      return typeof link === 'object'
+        ? this.$t(link)
+        : link;
     },
     close() {
       this.$emit('update:active', false);
