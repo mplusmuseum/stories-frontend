@@ -4,6 +4,7 @@ export default function () {
 
     state: {
       notice: false,
+      blurredContent: false,
     },
 
     getters: {
@@ -20,6 +21,9 @@ export default function () {
       },
       clearNotice(state) {
         state.notice = false;
+      },
+      updateBlurredContent(s, blurred) {
+        s.blurredContent = blurred;
       },
     },
 
