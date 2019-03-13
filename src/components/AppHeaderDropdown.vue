@@ -154,9 +154,13 @@ export default {
     },
     close() {
       this.$emit('update:active', false);
+      this.removeBlurredContent();
     },
     addDropdown(index) {
       if (this.panels.indexOf(index) === -1) this.panels.push(index);
+    },
+    removeBlurredContent() {
+      this.$store.commit('header/updateBlurredContent', false);
     },
   },
 };
