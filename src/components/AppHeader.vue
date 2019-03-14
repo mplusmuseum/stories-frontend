@@ -393,8 +393,7 @@ export default {
     }
     &--parent {
       padding: 0.1em 0.4em 0.1em 0.4em;
-      font-family: "DTLProkyonSTBold",
-      "PLUS", Helvetica, Arial, "PingFang HK", "蘋方-港", "HanHei TC", "Heiti TC", "STHeiti", "Microsoft JhengHei UI", "Microsoft JhengHei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+      font-family: "DTLProkyonSTBold", "PLUS", Helvetica, Arial, "PingFang HK", "蘋方-港", "HanHei TC", "Heiti TC", "STHeiti", "Microsoft JhengHei UI", "Microsoft JhengHei", "微软雅黑", STXihei, "华文细黑", sans-serif;
     }
     &--child {
       background: @accent;
