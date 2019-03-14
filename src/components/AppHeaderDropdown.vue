@@ -7,7 +7,6 @@
       class="dropdown-list-item">
 
         <a :href="$t(mplusItem.link)"
-        target="_blank"
         class="dropdown-link dropdown-link--mplus shadow small fs-s">
 
           ← <span class="lang-primary"

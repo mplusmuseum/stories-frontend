@@ -625,6 +625,7 @@ a.tag {
 .blur-filter {
   filter: blur(8px);
   transition: filter .35s ease;
+  backface-visibility: hidden;
   .mq-md({
     filter: none;
   });
@@ -702,7 +703,7 @@ a.tag {
 
 .drop-enter, .drop-leave-to {
   opacity: 0;
-  transform: translateY(-10%);
+  transform: translate3d(0, -10%, tz);
 }
 
 /* ACCESSIBILITY */
