@@ -353,6 +353,7 @@ export default {
   .dropdown {
     position: absolute;
     right: 0;
+    will-change: transform;
   }
   .dropdown-list {
     margin: 0;
