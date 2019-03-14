@@ -3,7 +3,8 @@
 
     <app-header/>
 
-    <router-view class="view"/>
+    <router-view class="view"
+    :class="{ 'blur-filter' : blurred }"/>
 
     <app-footer/>
 
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import AppFooter from './components/AppFooter.vue';
 import AppHeader from './components/AppHeader.vue';
 import AppLightbox from './components/AppLightbox.vue';
@@ -30,6 +32,9 @@ import AppLightboxQr from './components/AppLightboxQr.vue';
 
 export default {
   computed: {
+    ...mapState({
+      blurred: s => s.header.blurredContent,
+    }),
     key() {
       const { route } = this.$store.state;
       const key = route.name;
@@ -615,6 +620,15 @@ a.tag {
     display: table;
     clear: both;
   }
+}
+
+.blur-filter {
+  filter: blur(8px);
+  transition: filter .35s ease;
+  backface-visibility: hidden;
+  .mq-md({
+    filter: none;
+  });
 }
 
 /* TRANSITIONS */
