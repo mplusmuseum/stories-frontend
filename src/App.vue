@@ -703,7 +703,7 @@ a.tag {
 
 .drop-enter, .drop-leave-to {
   opacity: 0;
-  transform: translate3d(0, -10%, tz);
+  transform: translateY(-10%);
 }
 
 /* ACCESSIBILITY */
