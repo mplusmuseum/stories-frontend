@@ -111,7 +111,7 @@ export const footnoteMixin = name => ({
         if (block.type === 'footnotes') {
           data.currentIndex += 1;
           data.sections.push({ index, footnotes: [] });
-        } else if (block.content.footnotes) {
+        } else if (block.content.footnotes && data.currentIndex >= 0) {
           const newLocaled = this.$t(block.content.footnotes);
           data.sections[data.currentIndex].footnotes.unshift(...newLocaled);
         }
