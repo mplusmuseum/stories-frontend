@@ -27,6 +27,10 @@ export default {
     };
   },
   props: {
+    index: {
+      type: Number,
+      required: false,
+    },
     content: {
       type: Object,
       required: true,
