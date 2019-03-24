@@ -14,6 +14,10 @@ import AppNewsletter from './AppNewsletter.vue';
 
 export default {
   props: {
+    index: {
+      type: Number,
+      required: false,
+    },
     content: {
       default: {
         identifier: 'block-newsletter',

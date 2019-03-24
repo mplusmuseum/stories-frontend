@@ -18,6 +18,10 @@
 <script>
 export default {
   props: {
+    index: {
+      type: Number,
+      required: false,
+    },
     content: {
       required: true,
     },

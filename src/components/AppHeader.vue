@@ -81,24 +81,6 @@
           </button>
 
           <button class="header__icon"
-          @click="toggleConnect"
-          :aria-label="$tl('accessibility.btnConnect')"
-          :data-prevent="prevent.connect">
-
-            <img v-show="panel !== 'connect'"
-            class="animate-wave"
-            src="../assets/img/connect-wave.svg"
-            alt=""
-            :data-prevent="prevent.connect">
-
-            <img v-show="panel === 'connect'"
-            src="../assets/img/cross.svg"
-            alt=""
-            :data-prevent="prevent.connect">
-
-          </button>
-
-          <button class="header__icon"
           v-if="searchEnabled"
           @click="toggleSearch"
           :aria-label="$tl('accessibility.btnSearch')"
@@ -129,11 +111,6 @@
         :active.sync="panel"
         :prevent="prevent.dropdown"/>
 
-        <app-header-connect v-if="panel === 'connect'"
-        key="contentPanel"
-        :active.sync="panel"
-        :prevent="prevent.connect"/>
-
         <app-header-search v-if="panel === 'search'"
         key="search"
         :active.sync="panel"
@@ -150,7 +127,6 @@
 import { mapState } from 'vuex';
 import _ from 'lodash';
 import locales from '../locale';
-import AppHeaderConnect from './AppHeaderConnect.vue';
 import AppHeaderDropdown from './AppHeaderDropdown.vue';
 import AppHeaderSearch from './AppHeaderSearch.vue';
 import BlockNewsletter from './BlockNewsletter.vue';
@@ -160,7 +136,6 @@ export default {
     return {
       panel: false,
       prevent: {
-        connect: 'connect',
         dropdown: 'dropdown',
         search: 'search',
       },
@@ -191,12 +166,6 @@ export default {
       // Maintain query
       this.$router.push({ params: { lang }, query: this.routeQuery });
     },
-    toggleConnect() {
-      this.panel = (this.panel === 'connect')
-        ? false
-        : 'connect';
-      this.toggleBlurredContent();
-    },
     toggleDropdown() {
       this.panel = (this.panel === 'dropdown')
         ? false
@@ -214,7 +183,6 @@ export default {
     },
   },
   components: {
-    AppHeaderConnect,
     AppHeaderDropdown,
     AppHeaderSearch,
     BlockNewsletter,
@@ -224,13 +192,6 @@ export default {
 
 <style lang="less">
 @import "../less/variables.less";
-
-@keyframes wave {
-  0%   { transform: rotateZ(0deg); }
-  25%   { transform: rotateZ(-15deg); }
-  75%   { transform: rotateZ(20deg); }
-  100%   { transform: rotateZ(0deg); }
-}
 
 .header {
   position: fixed;
@@ -343,11 +304,6 @@ export default {
     transition: .15s ease transform;
     &:hover, &:focus {
       transform: scale(1.1);
-    }
-    &:hover {
-      .animate-wave {
-        animation: wave 650ms cubic-bezier(.4,.2,.6,.8) infinite;
-      }
     }
   }
   .dropdown {
