@@ -1,9 +1,10 @@
 <template>
   <div class="content-blocks">
 
-    <component v-for="item of items"
+    <component v-for="(item, index) of items"
     :key="item.id"
     :is="`block-${item.type}`"
+    :index="index"
     :content="item.content"/>
 
   </div>

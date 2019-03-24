@@ -28,14 +28,19 @@
 export default {
   computed: {
     footnotes() {
-      const footnotes = this.content.footnotes
+      const sections = this.content.footnotes
         || this.$parent.$parent.footnotes
         || this.$parent.$parent.$parent.footnotes
         || [];
-      return footnotes;
+      const section = sections.find(s => s.index === this.index);
+      return section.footnotes;
     },
   },
   props: {
+    index: {
+      type: Number,
+      required: true,
+    },
     content: {
       required: true,
     },
@@ -46,6 +51,7 @@ export default {
 
 <style lang="less">
 .footnotes-block {
+  counter-reset: footnotesinline;
   ol {
     margin: 0;
     padding: 0 0 0 1em;
