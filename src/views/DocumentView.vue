@@ -19,7 +19,11 @@
 
           </div>
 
-          <template v-if="page.contents">
+          <div class="document__tags">
+            <tag-group class="fs-s fs-b-sm" :tagIds="page.tags"/>
+          </div>
+
+          <div v-if="page.contents" class="document__contents">
 
             <div class="document-item__header">
 
@@ -29,7 +33,7 @@
 
             <div class="text-block">
 
-              <component :is="page.contents" class="document__contents">
+              <component :is="page.contents">
 
                 <li v-for="section of page.content" :key="section.name"><a :href="`#${section.name}`" v-html="$t(section.title)"></a></li>
 
@@ -37,7 +41,7 @@
 
             </div>
 
-          </template>
+          </div>
 
         </div>
 
@@ -96,10 +100,11 @@ export default {
 .document {
   padding: 1em 0;
   .mq-sm({ padding: 1.5em 0; });
-  &--no-contents {
-    .document__title {
-      margin-bottom: 0;
-    }
+  &__contents {
+    margin-top: 1em;
+  }
+  &__tags {
+    margin-top: 0.5em;
   }
 }
 
