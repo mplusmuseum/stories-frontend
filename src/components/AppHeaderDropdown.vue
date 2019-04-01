@@ -21,7 +21,7 @@
         class="dropdown-list-item"
         @mouseenter="isMobile || !item.subitems ? null : addDropdown(i)">
 
-        <a :href="linkHref(item.link)"
+        <a :href="linkHref(item)"
         :target="linkTarget(item.link_type)"
         class="dropdown-link dropdown-link--parent shadow"
         :class="{ 'dropdown-link--external' : item.link_type === 'external' }">
@@ -49,7 +49,7 @@
             </router-link>
 
             <a v-else
-            :href="linkHref(subitem.link)"
+            :href="linkHref(subitem)"
             class="dropdown-link dropdown-link--child shadow"
             :class="{ 'small fs-s' : subitem.link_type === 'external' }">
 
@@ -146,10 +146,10 @@ export default {
         ? '_blank'
         : '_self';
     },
-    linkHref(link) {
-      return typeof link === 'object'
-        ? this.$t(link)
-        : link;
+    linkHref(item) {
+      return item.type === 'page'
+        ? this.$t(item.link)
+        : this.$t(item.link_external);
     },
     close() {
       this.$emit('update:active', false);
