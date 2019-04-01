@@ -330,7 +330,7 @@ export default {
     color: @accent;
     border-bottom: 3px solid transparent;
     transition: .125s ease border-color;
-    &:hover, &:focus {
+    &:hover, &:focus, &.router-link-active, &.active {
       border-color: @accent;
     }
     &.small {
@@ -355,7 +355,7 @@ export default {
     &--child {
       background: @accent;
       color: @white;
-      &:hover, &:focus {
+      &:hover, &:focus, &.router-link-active, &.active {
         border-bottom-color: @white;
       }
       &.small {
