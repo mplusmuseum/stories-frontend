@@ -34,7 +34,7 @@
 
         </a>
 
-        <ul v-if="item.subitems"
+        <ul v-if="item.subitems && isStories(item.title.en)"
         key="dropdown"
         class="dropdown-list dropdown-list--children">
 
@@ -127,6 +127,9 @@ export default {
     window.removeEventListener('resize', this.mq);
   },
   methods: {
+    isStories(title) {
+      return title.toLowerCase().indexOf('stories') !== -1;
+    },
     mq() {
       this.isMobile = window.matchMedia('(max-width: 992px)').matches;
     },
@@ -157,7 +160,7 @@ export default {
     linkParentActive(item) {
       const { name } = this.$route;
       if (item.subitems
-        && _.find(item.subitems, o => o.link.name === name)) return true;
+      && _.find(item.subitems, o => o.link.name === name)) return true;
       return false;
     },
     close() {
