@@ -24,7 +24,10 @@
         <a :href="linkHref(item)"
         :target="linkTarget(item.link_type)"
         class="dropdown-link dropdown-link--parent shadow"
-        :class="{ 'dropdown-link--external' : item.link_type === 'external' }">
+        :class="[
+          { 'dropdown-link--external' : item.link_type === 'external' },
+          { 'active' : linkParentActive(item) },
+        ]">
 
           <span class="lang-primary"
           v-html="$t(item.title)"/>
@@ -150,6 +153,12 @@ export default {
       return item.type === 'page'
         ? this.$t(item.link)
         : this.$t(item.link_external);
+    },
+    linkParentActive(item) {
+      const { name } = this.$route;
+      if (item.subitems
+        && _.find(item.subitems, o => o.link.name === name)) return true;
+      return false;
     },
     close() {
       this.$emit('update:active', false);
