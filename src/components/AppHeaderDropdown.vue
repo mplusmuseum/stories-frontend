@@ -21,17 +21,20 @@
         class="dropdown-list-item"
         @mouseenter="isMobile || !item.subitems ? null : addDropdown(i)">
 
-        <a :href="linkHref(item.link)"
+        <a :href="linkHref(item)"
         :target="linkTarget(item.link_type)"
         class="dropdown-link dropdown-link--parent shadow"
-        :class="{ 'dropdown-link--external' : item.link_type === 'external' }">
+        :class="[
+          { 'dropdown-link--external' : item.link_type === 'external' },
+          { 'active' : linkParentActive(item) },
+        ]">
 
           <span class="lang-primary"
           v-html="$t(item.title)"/>
 
         </a>
 
-        <ul v-if="item.subitems"
+        <ul v-if="item.subitems && isStories(item.title.en)"
         key="dropdown"
         class="dropdown-list dropdown-list--children">
 
@@ -49,7 +52,7 @@
             </router-link>
 
             <a v-else
-            :href="linkHref(subitem.link)"
+            :href="linkHref(subitem)"
             class="dropdown-link dropdown-link--child shadow"
             :class="{ 'small fs-s' : subitem.link_type === 'external' }">
 
@@ -124,6 +127,9 @@ export default {
     window.removeEventListener('resize', this.mq);
   },
   methods: {
+    isStories(title) {
+      return title.toLowerCase().indexOf('stories') !== -1;
+    },
     mq() {
       this.isMobile = window.matchMedia('(max-width: 992px)').matches;
     },
@@ -146,10 +152,16 @@ export default {
         ? '_blank'
         : '_self';
     },
-    linkHref(link) {
-      return typeof link === 'object'
-        ? this.$t(link)
-        : link;
+    linkHref(item) {
+      return item.type === 'page'
+        ? this.$t(item.link)
+        : this.$t(item.link_external);
+    },
+    linkParentActive(item) {
+      const { name } = this.$route;
+      if (item.subitems
+      && _.find(item.subitems, o => o.link.name === name)) return true;
+      return false;
     },
     close() {
       this.$emit('update:active', false);
