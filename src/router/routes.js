@@ -11,6 +11,8 @@ const ExploreView = () => import('../views/ExploreView.vue');
 const HomeView = () => import('../views/HomeView.vue');
 const JournalView = () => import('../views/JournalView.vue');
 const IssueView = () => import('../views/IssueView.vue');
+const TalksSeriesListView = () => import('../views/TalksSeriesListView.vue');
+const TalkView = () => import('../views/TalkView.vue');
 const NotFoundView = () => import('../views/NotFoundView.vue');
 const PageView = () => import('../views/PageView.vue');
 const SearchView = () => import('../views/SearchView.vue');
@@ -194,12 +196,36 @@ const exhibitionsRoutes = [
   },
 ];
 
+const talksRoutes = [
+  ...enforcedSlashRoute({
+    name: 'talks',
+    path: `/${langParam}/talks`,
+    component: TalksSeriesListView,
+  }),
+  ...enforcedSlashRoute({
+    name: 'talk',
+    path: `/${langParam}/talks/:talk`,
+    component: TalkView,
+  }),
+  {
+    name: 'talks-redirect',
+    path: '/talks',
+    redirect: redirectWithLang('talks'),
+  },
+  {
+    name: 'talk-redirect',
+    path: '/talks/:talk',
+    redirect: redirectWithLang('talk'),
+  },
+];
+
 const routes = [
   ...homeRoutes,
   ...blogRoutes,
   ...journalRoutes,
   ...channelRoutes,
   ...exhibitionsRoutes,
+  ...talksRoutes,
   ...exploreRoutes,
   ...searchRoutes,
   notFoundRoute,
