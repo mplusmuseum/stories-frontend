@@ -3,12 +3,38 @@
 
     <app-section-label :type="labelType(content)" same/>
 
-    <app-title class="fs-l"
+    <h3 v-if="content.type === 'talk'"
+    class="fs-l">
+      <span v-for="(author, i) in parseAuthors(content.authors)"
+      :key="i">
+        <template v-if="i !== 0">, </template>
+        <app-title wrap="span"
+        :title="author"/>
+      </span>
+    </h3>    
+
+    <app-title v-else
+    class="fs-l"
     wrap="h3"
-    :title="content.title"/>
+    :title="title"/>
 
     <div v-if="content.type === 'episode'"
     class="banner__meta fs-b">
+
+      <template v-if="content.series && content.series !== false">
+        <img src="../assets/img/play.svg"
+        :alt="$tl('accessibility.series')">&thinsp;<span v-html="$t(content.series.title)"></span>&ensp;
+      </template>
+
+      <img src="../assets/img/clock.svg"
+      :alt="$tl('accessibility.duration')">&thinsp;<span v-html="$t(content.duration)"></span>
+
+    </div>
+
+    <div v-if="content.type === 'talk'"
+    class="banner__meta fs-b">
+
+      <h4 class="banner__subtitle">{{ $tt(content.title) }}</h4>
 
       <template v-if="content.series && content.series !== false">
         <img src="../assets/img/play.svg"
@@ -70,6 +96,16 @@ export default {
   components: {
     AppLink,
     SnippetTranslate,
+  },
+  methods: {
+    parseAuthors(ids) {
+      if (!ids || !ids.length) return false;
+      const authors = ids.map((id) => {
+        const author = this.$store.state.site.authors[id];
+        return author.title;
+      });
+      return authors;
+    },
   },
 };
 </script>
