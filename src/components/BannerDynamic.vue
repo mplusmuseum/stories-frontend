@@ -1,7 +1,8 @@
 <template>
   <app-banner :content="content">
 
-    <app-section-label :type="labelType(content)" same/>
+    <app-section-label v-if="showSection !== false"
+    :type="labelType(content)" same/>
 
     <h3 v-if="content.type === 'talk'"
     class="fs-l">
@@ -91,6 +92,9 @@ export default {
   props: {
     content: {
       required: true,
+    },
+    showSection: {
+      default: true,
     },
   },
   components: {
