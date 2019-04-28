@@ -1,11 +1,12 @@
 <template>
   <snippet-translate class="byline"
   :snippet="this.snippet"
-  :data="{ author, authors, categories, date }"
+  :data="{ author, authors, categories, talkcategories, date }"
   :parsers="{
     author: parseAuthor,
     authors: parseAuthors,
     categories: parseCategories,
+    talkcategories: parseTalkCategories,
     date: parseDate,
   }"/>
 </template>
@@ -20,6 +21,10 @@ export default {
       required: true,
     },
     categories: {
+      type: Array,
+      default: () => [],
+    },
+    talkcategories: {
       type: Array,
       default: () => [],
     },
@@ -107,6 +112,23 @@ export default {
         }
         // Add separator between list elements
         if (index < categories.length - 1) arr.push(this.$t(seperator));
+        return arr;
+      }, []);
+    },
+    // Talks only
+    parseTalkCategories(talkcategories, h) {
+      if (!talkcategories.length) return false;
+      const seperator = { en: ', ', tc: '，' };
+      return _.reduce(talkcategories, (arr, category, index) => {
+        const content = this.$t(category.title);
+        if (this.link) {
+          const data = { props: { to: { name: 'talks', query: { category: category.name } } } };
+          arr.push(h('router-link', data, content));
+        } else {
+          arr.push(content);
+        }
+        // Add separator between list elements
+        if (index < talkcategories.length - 1) arr.push(this.$t(seperator));
         return arr;
       }, []);
     },

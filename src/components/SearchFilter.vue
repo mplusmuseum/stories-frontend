@@ -31,6 +31,7 @@ export default {
         'documentation',
         'basic',
         'issue',
+        'talk',
       ];
       const options = _.map(opts, name => ({
         title: this.$tl(`content.${name}`).many,
