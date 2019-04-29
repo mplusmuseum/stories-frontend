@@ -65,9 +65,13 @@ export default {
         query: { q: this.query },
       });
       this.close();
+      this.closeBlurredContent();
     },
     close() {
       this.$emit('update:active', false);
+    },
+    closeBlurredContent() {
+      this.$store.commit('header/updateBlurredContent', false);
     },
   },
 };

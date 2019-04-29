@@ -4,6 +4,7 @@ import locales from '../locale';
 import blog from './blog';
 import channel from './channel';
 import exhibitions from './exhibitions';
+import talks from './talks';
 import explore from './explore';
 import header from './header';
 import home from './home';
@@ -63,6 +64,7 @@ export function createStore() {
       journal: journal(),
       lightbox: lightbox(),
       pages: pages(),
+      talks: talks(),
       search: search(),
       site: site(),
       tags: tags(),

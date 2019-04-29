@@ -1,11 +1,13 @@
 <template>
   <snippet-translate class="byline"
   :snippet="this.snippet"
-  :data="{ author, authors, categories, date }"
+  :data="{ author, authors, categories, talkcategories, date }"
   :parsers="{
     author: parseAuthor,
     authors: parseAuthors,
     categories: parseCategories,
+    categories: parseCategoriesByName('blog'),
+    talkcategories: parseCategoriesByName('talk'),
     date: parseDate,
   }"/>
 </template>
@@ -20,6 +22,10 @@ export default {
       required: true,
     },
     categories: {
+      type: Array,
+      default: () => [],
+    },
+    talkcategories: {
       type: Array,
       default: () => [],
     },
@@ -93,22 +99,23 @@ export default {
 
       return this.naturalList(authors);
     },
-    // Blog only
-    parseCategories(categories, h) {
-      if (!categories.length) return false;
-      const seperator = { en: ', ', tc: '，' };
-      return _.reduce(categories, (arr, category, index) => {
-        const content = this.$t(category.title);
-        if (this.link) {
-          const data = { props: { to: { name: 'blog', query: { category: category.name } } } };
-          arr.push(h('router-link', data, content));
-        } else {
-          arr.push(content);
-        }
-        // Add separator between list elements
-        if (index < categories.length - 1) arr.push(this.$t(seperator));
-        return arr;
-      }, []);
+    parseCategoriesByName(name) {
+      return (categories, h) => {
+        if (!categories.length) return false;
+        const seperator = { en: ', ', tc: '，' };
+        return _.reduce(categories, (arr, category, index) => {
+          const content = this.$t(category.title);
+          if (this.link) {
+            const data = { props: { to: { name, query: { category: category.name } } } };
+            arr.push(h('router-link', data, content));
+          } else {
+            arr.push(content);
+          }
+          // Add separator between list elements
+          if (index < categories.length - 1) arr.push(this.$t(seperator));
+          return arr;
+        }, []);
+      };
     },
     parseDate(date, h) {
       if (!date) return false;

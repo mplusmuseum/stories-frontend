@@ -428,7 +428,6 @@ a.tag {
 }
 
 .banner {
-  position: relative;
   height: 50vh;
   background: @black;
   min-height: 300px;
@@ -439,6 +438,11 @@ a.tag {
   .mq-md({
     height: 70vh;
   });
+  &__inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
   &__content {
     color: @white;
     position: absolute;
@@ -462,6 +466,10 @@ a.tag {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+  &__subtitle {
+    margin-bottom: 0.2em;
+    font-weight: @fontNormal;
   }
   a.banner__flex {
     color: inherit;

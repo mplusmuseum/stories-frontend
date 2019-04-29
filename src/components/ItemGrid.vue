@@ -4,7 +4,7 @@
     <div class="item-grid__grid grid"
     :class="{ 'grid--loaded': initialized }"
     ref="grid">
-    
+
       <div class="grid__sizer"
       :style="sizerStyle"
       ref="sizer"></div>
@@ -43,6 +43,7 @@ import ItemEpisode from './ItemEpisode.vue';
 import ItemExhibition from './ItemExhibition.vue';
 import ItemIssue from './ItemIssue.vue';
 import ItemPost from './ItemPost.vue';
+import ItemTalk from './ItemTalk.vue';
 
 export default {
   components: {
@@ -51,6 +52,7 @@ export default {
     ItemExhibition,
     ItemIssue,
     ItemPost,
+    ItemTalk,
   },
   props: {
     content: {
@@ -216,7 +218,8 @@ export default {
     padding: 1em 0.5em;
     display: inline-block;
     vertical-align: top;
-    &.item--episode {
+    &.item--episode,
+    &.item--talk {
       color: @white;
       .item__inner {
         background: @black;
