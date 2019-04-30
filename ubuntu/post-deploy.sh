@@ -2,9 +2,9 @@
 
 export HOME=/home/ubuntu
 
-cd /usr/local/mplusmuseum/projects/mplusmuseum-stories
-sudo npm i -g npm
-sudo npm install
-sudo npm run build
+cd /usr/local/mplus/mplusmuseum-stories
+npm i -g npm
+npm install
+npm run build
 
 pm2 restart mplusmuseum-stories
