@@ -2,7 +2,7 @@
 
 export HOME=/home/ubuntu
 
-cd /usr/local/mplus/mplusmuseum-stories
+cd /home/ubuntu/mplusmuseum-stories
 npm i -g npm
 npm install
 npm run build
