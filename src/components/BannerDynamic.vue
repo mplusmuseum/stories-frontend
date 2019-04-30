@@ -17,7 +17,7 @@
     <app-title v-else
     class="fs-l"
     wrap="h3"
-    :title="title"/>
+    :title="content.title"/>
 
     <div v-if="content.type === 'episode'"
     class="banner__meta fs-b">
