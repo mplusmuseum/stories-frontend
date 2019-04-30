@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /usr/local/mplusmuseum/projects/mplusmuseum-stories
+    destination: /home/ubuntu/mplusmuseum-stories
 hooks:
   AfterInstall:
     - location: /ubuntu/post-deploy.sh
