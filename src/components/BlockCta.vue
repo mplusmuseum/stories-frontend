@@ -1,19 +1,22 @@
 <template>
   <div class="button-block block" :class="alignmentClass">
-    <a
-    v-if="isExternalLink"
+    <component :is="isExternalLink ? 'a' : 'router-link'"
     class="button button--accent"
-    :href="link"
-    target="_blank"
-    v-html="$t(content.text)"
-    />
+    v-bind="linkProps">
+      <span v-html="$t(content.text)"/>
 
-    <router-link
-    v-else
-    class="button button--accent"
-    :to="link"
-    v-html="$t(content.text)"
-    />
+      <template v-if="content.icon === 'external-link'">
+        <img
+        class="external-icon"
+        src="../assets/img/external.svg"
+        :alt="$tl('accessibility.externalLink')">
+
+        <img
+        class="external-icon external-icon--hover"
+        src="../assets/img/external-blue.svg"
+        :alt="$tl('accessibility.externalLink')">
+      </template>
+    </component>
   </div>
 </template>
 
@@ -42,6 +45,14 @@ export default {
         ? `button-block--align-${this.content.align}`
         : null;
     },
+    linkProps() {
+      return this.isExternalLink ? {
+        href: this.link,
+        target: '_blank',
+      } : {
+        to: this.link,
+      };
+    },
   },
 };
 </script>
@@ -56,6 +67,21 @@ export default {
   }
   &--align-right {
     text-align: right;
+  }
+  .external-icon {
+    height: 1em;
+    margin-left: 0.125em;
+    &--hover {
+      display: none;
+    }
+  }
+  a:hover, a:focus {
+    .external-icon {
+      display: none;
+      &--hover {
+        display: inline;
+      }
+    }
   }
 }
 </style>

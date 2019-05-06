@@ -39,6 +39,8 @@
 <script>
 import _ from 'lodash';
 import ItemArticle from './ItemArticle.vue';
+import ItemBasic from './ItemBasic.vue';
+import ItemDocumentation from './ItemDocumentation.vue';
 import ItemEpisode from './ItemEpisode.vue';
 import ItemExhibition from './ItemExhibition.vue';
 import ItemIssue from './ItemIssue.vue';
@@ -48,6 +50,8 @@ import ItemTalk from './ItemTalk.vue';
 export default {
   components: {
     ItemArticle,
+    ItemBasic,
+    ItemDocumentation,
     ItemEpisode,
     ItemExhibition,
     ItemIssue,
