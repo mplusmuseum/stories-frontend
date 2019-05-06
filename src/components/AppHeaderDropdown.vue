@@ -153,9 +153,12 @@ export default {
         : '_self';
     },
     linkHref(item) {
-      return item.type === 'page'
-        ? this.$t(item.link)
-        : this.$t(item.link_external);
+      const link = !item.type || item.type === 'page'
+        ? item.link
+        : item.link_external;
+      return typeof link === 'object'
+        ? this.$t(link)
+        : link;
     },
     linkParentActive(item) {
       const { name } = this.$route;
