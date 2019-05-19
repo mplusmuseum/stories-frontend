@@ -5,25 +5,22 @@
     v-bind="linkProps">
       <span v-html="$t(content.text)"/>
 
-      <template v-if="content.icon === 'external-link'">
-        <img
-        class="external-icon"
-        src="../assets/img/external.svg"
-        :alt="$tl('accessibility.externalLink')">
-
-        <img
-        class="external-icon external-icon--hover"
-        src="../assets/img/external-blue.svg"
-        :alt="$tl('accessibility.externalLink')">
-      </template>
+      <ExternalIcon
+      v-if="content.icon === 'external-link'"
+      class="external-icon" />
     </component>
   </div>
 </template>
 
 <script>
+import ExternalIcon from './icons/External.vue';
+
 const isHttpLink = /^https?:\/\/[^\s/$.?#].[^\s]*$/;
 
 export default {
+  components: {
+    ExternalIcon,
+  },
   props: {
     index: {
       type: Number,
@@ -71,17 +68,6 @@ export default {
   .external-icon {
     height: 1em;
     margin-left: 0.125em;
-    &--hover {
-      display: none;
-    }
-  }
-  a:hover, a:focus {
-    .external-icon {
-      display: none;
-      &--hover {
-        display: inline;
-      }
-    }
   }
 }
 </style>
