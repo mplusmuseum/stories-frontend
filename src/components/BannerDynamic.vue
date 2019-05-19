@@ -68,10 +68,7 @@
 
           <span v-html="$tl(`exhibitions.${button.translation}`)"/>
 
-          <img v-if="typeof button.link === 'string'"
-          class="external-icon"
-          src="../assets/img/external.svg"
-          :alt="$tl('accessibility.externalLink')">
+          <ExternalIcon v-if="typeof button.link === 'string'" class="external-icon"/>
 
         </div>
 
@@ -85,6 +82,7 @@
 <script>
 import AppLink from './AppLink.vue';
 import SnippetTranslate from './SnippetTranslate.vue';
+import ExternalIcon from './icons/External.vue';
 import { labelMixin } from '../util/mixins';
 
 export default {
@@ -99,6 +97,7 @@ export default {
   },
   components: {
     AppLink,
+    ExternalIcon,
     SnippetTranslate,
   },
   methods: {
