@@ -523,7 +523,7 @@ a.tag {
   }
   &__meta {
     margin-top: 0.4em;
-    img {
+    img, svg {
       height: 0.75em;
       width: 0.75em;
     }
