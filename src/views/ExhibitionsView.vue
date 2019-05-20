@@ -55,10 +55,9 @@
 
                 <span v-html="$tl(`exhibitions.${button.translation}`)"/>
 
-                <img v-if="typeof button.link === 'string'"
-                class="external-icon"
-                src="../assets/img/external.svg"
-                :alt="$tl('accessibility.externalLink')">
+                <ExternalIcon
+                v-if="typeof button.link === 'string'"
+                class="external-icon" />
 
               </div>
 
@@ -88,9 +87,10 @@
 import { mapState } from 'vuex';
 
 import meta from '../util/meta';
-import SectionHeader from '../components/SectionHeader.vue';
 import AppLink from '../components/AppLink.vue';
 import AppSticky from '../components/AppSticky.vue';
+import ExternalIcon from '../components/icons/External.vue';
+import SectionHeader from '../components/SectionHeader.vue';
 
 export default {
   mixins: [meta],
@@ -147,6 +147,7 @@ export default {
   components: {
     AppLink,
     AppSticky,
+    ExternalIcon,
     SectionHeader,
   },
 };
