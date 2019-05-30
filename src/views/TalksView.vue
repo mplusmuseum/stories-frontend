@@ -83,6 +83,7 @@
   }
   .banner {
     box-shadow: @shadowStyle;
+    max-height: 580px;
   }
 }
 </style>

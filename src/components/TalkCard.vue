@@ -36,7 +36,7 @@
 
           <div class="talk-card__meta fs-s">
 
-            <h5 class="talk-card__subtitle fs-s">{{ $tt(talk.title) }}</h5>
+            <h5 class="talk-card__subtitle fs-s">{{ $t(talk.title) }}</h5>
             
             <template v-if="talk.categories && talk.categories.length">
               <img src="../assets/img/play.svg"
