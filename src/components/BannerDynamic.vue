@@ -35,7 +35,7 @@
     <div v-if="content.type === 'talk'"
     class="banner__meta fs-b">
 
-      <h4 class="banner__subtitle">{{ $tt(content.title) }}</h4>
+      <h4 class="banner__subtitle">{{ $t(content.title) }}</h4>
 
       <template v-if="content.series && content.series !== false">
         <img src="../assets/img/play.svg"
