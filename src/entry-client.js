@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import VueAnalytics from 'vue-analytics';
 import VueGtm from 'vue-gtm';
 import VueClipboard from 'vue-clipboards';
 import _ from 'lodash';
@@ -59,14 +58,6 @@ Vue.mixin({
 });
 
 const { app, router, store } = createApp();
-
-// Use Analytics
-if (process.env.ANALYTICS_ID) {
-  Vue.use(VueAnalytics, {
-    id: process.env.ANALYTICS_ID,
-    router,
-  });
-}
 
 // Use Tag Manager
 if (process.env.TAG_MANAGER_ID) {
