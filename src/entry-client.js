@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
+import VueGtm from 'vue-gtm';
 import VueClipboard from 'vue-clipboards';
 import _ from 'lodash';
 import 'es6-promise/auto';
@@ -64,6 +65,15 @@ if (process.env.ANALYTICS_ID) {
   Vue.use(VueAnalytics, {
     id: process.env.ANALYTICS_ID,
     router,
+  });
+}
+
+// Use Tag Manager
+if (process.env.TAG_MANAGER_ID) {
+  Vue.use(VueGtm, {
+    id: process.env.TAG_MANAGER_ID,
+    debug: true,
+    vueRouter: router,
   });
 }
 
