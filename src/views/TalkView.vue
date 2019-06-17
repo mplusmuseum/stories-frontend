@@ -229,10 +229,10 @@ export default {
     toggle() {
       this.truncated = !this.truncated;
       this.$triggerNative();
-      this.$ga.event({
-        eventCategory: 'Talk',
-        eventAction: this.truncated ? 'Expand' : 'Collapse',
-        eventLabel: this.talk.title[this.lang],
+      this.$gtm.trackEvent({
+        category: 'Talk',
+        action: this.truncated ? 'Collapse' : 'Expand',
+        label: this.talk.title[this.lang],
       });
     },
   },
