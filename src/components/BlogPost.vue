@@ -160,10 +160,10 @@ export default {
     extend() {
       this.$store.commit('blog/extendPost', this.post);
       this.$triggerNative();
-      this.$ga.event({
-        eventCategory: 'Blog Post',
-        eventAction: 'Expand',
-        eventLabel: this.post.title[this.lang],
+      this.$gtm.trackEvent({
+        category: 'Blog Post',
+        action: 'Expand',
+        label: this.post.title[this.lang],
       });
     },
     collapse() {
@@ -176,10 +176,10 @@ export default {
         window.scrollTo(0, newPosition);
         this.$triggerNative();
       });
-      this.$ga.event({
-        eventCategory: 'Blog Post',
-        eventAction: 'Collapse',
-        eventLabel: this.post.title[this.lang],
+      this.$gtm.trackEvent({
+        category: 'Blog Post',
+        action: 'Collapse',
+        label: this.post.title[this.lang],
       });
     },
   },
