@@ -23,7 +23,7 @@ const config = merge(base, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
-      'process.env.ANALYTICS_ID': JSON.stringify(process.env.ANALYTICS_ID),
+      'process.env.TAG_MANAGER_ID': JSON.stringify(process.env.TAG_MANAGER_ID),
       'process.env.MODE': JSON.stringify(process.env.MODE),
       'process.env.FONT_URL': JSON.stringify(process.env.FONT_URL),
     }),
