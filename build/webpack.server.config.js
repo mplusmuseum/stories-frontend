@@ -29,7 +29,12 @@ module.exports = merge(base, {
       {
         test: /\.(less)$/,
         use: [
-          'css-loader/locals',
+          {
+            loader: 'css-loader',
+            options: {
+              onlyLocals: true,
+            },
+          },
           'less-loader',
         ],
       },
