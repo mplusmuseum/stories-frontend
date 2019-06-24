@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 .external-icon {
   height: 1em;
   margin-left: 0.125em;
