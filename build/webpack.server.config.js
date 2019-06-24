@@ -24,6 +24,22 @@ module.exports = merge(base, {
     // do not externalize CSS files in case we need to import it from a dep
     whitelist: /\.css$/,
   }),
+  module: {
+    rules: [
+      {
+        test: /\.(less)$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              onlyLocals: true,
+            },
+          },
+          'less-loader',
+        ],
+      },
+    ],
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
