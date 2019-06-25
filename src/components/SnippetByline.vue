@@ -5,7 +5,6 @@
   :parsers="{
     author: parseAuthor,
     authors: parseAuthors,
-    categories: parseCategories,
     categories: parseCategoriesByName('blog'),
     talkcategories: parseCategoriesByName('talk'),
     date: parseDate,

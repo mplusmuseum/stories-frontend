@@ -1,27 +1,19 @@
 const path = require('path');
-const webpack = require('webpack');
 const vueConfig = require('./vue-loader.config');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const plugins = isProd ? [
-  new webpack.optimize.UglifyJsPlugin({
-    compress: { warnings: false },
-  }),
-  new ExtractTextPlugin({
-    filename: 'common.[chunkhash].css',
-  }),
-  new webpack.optimize.ModuleConcatenationPlugin(),
-] : [
-  new FriendlyErrorsPlugin(),
-];
+const plugins = [new VueLoaderPlugin()];
+
+if (!isProd) {
+  plugins.push(new FriendlyErrorsPlugin());
+}
 
 module.exports = {
-  devtool: isProd
-    ? false
-    : '#cheap-module-source-map',
+  mode: process.env.NODE_ENV || 'development',
+  devtool: isProd ? false : '#cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
@@ -41,12 +33,14 @@ module.exports = {
         test: /\.(vue|js)$/,
         enforce: 'pre',
         exclude: /node_modules/,
-        use: [{
-          loader: 'eslint-loader',
-          options: {
-            formatter: require('eslint-formatter-friendly'),
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              formatter: require('eslint-formatter-friendly'),
+            },
           },
-        }],
+        ],
       },
       // loaders
       {
@@ -73,15 +67,6 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]',
         },
-      },
-      {
-        test: /\.css$/,
-        use: isProd
-          ? ExtractTextPlugin.extract({
-            use: 'css-loader?minimize',
-            fallback: 'vue-style-loader',
-          })
-          : ['vue-style-loader', 'css-loader'],
       },
     ],
   },

@@ -7,7 +7,7 @@
 
       <a v-for="(item) of items"
       class="sharebar__block"
-      @click="share(item.share, $event)"
+      @click="share(item.share, item.title, $event)"
       :key="item.id"
       :href="item.share | shareLink(data)">
 
@@ -94,7 +94,7 @@ export default {
     toggle() {
       this.expanded = !this.expanded;
     },
-    share(shareURI, e) {
+    share(shareURI, platform, e) {
       if (shareURI.startsWith('http')) {
         e.preventDefault();
         let top = 100;
@@ -112,6 +112,11 @@ export default {
         e.preventDefault();
         this.$store.commit('lightbox/updateQR', this.data.location);
       }
+      this.$gtm.trackEvent({
+        category: this.$t(platform),
+        action: 'Share',
+        label: this.data.title,
+      });
     },
   },
   mounted() {

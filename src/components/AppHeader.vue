@@ -163,8 +163,16 @@ export default {
     },
     changeLanguage() {
       const lang = (this.lang === locales[0]) ? locales[1] : locales[0];
+      this.trackChangeLanguage(lang);
       // Maintain query
       this.$router.push({ params: { lang }, query: this.routeQuery });
+    },
+    trackChangeLanguage(lang) {
+      this.$gtm.trackEvent({
+        category: 'Language',
+        action: 'Change',
+        label: lang,
+      });
     },
     toggleDropdown() {
       this.panel = (this.panel === 'dropdown')
