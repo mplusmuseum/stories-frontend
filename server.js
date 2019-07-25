@@ -206,7 +206,13 @@ sitemapRoute('/tc/sitemap.xml', sitemapEndpoints.tc);
 
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
-  res.send('User-agent: *\nDisallow: /status');
+  if (isProd) {
+    // disallow robots to crawl /status for production environment
+    res.send('User-agent: *\nDisallow: /status');
+  } else {
+    // disallow robots to crawl all contents for non-production environment
+    res.send('User-agent: *\nDisallow: /');
+  }
 });
 
 // Use language detection middleware for all other GET requests
