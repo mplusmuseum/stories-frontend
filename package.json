@@ -27,7 +27,7 @@
     "express-sslify": "^1.2.0",
     "he": "^1.2.0",
     "http-auth": "^3.2.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "lru-cache": "^4.1.5",
     "object-fit-images": "^3.2.4",
     "object-fit-videos": "^1.0.4",
